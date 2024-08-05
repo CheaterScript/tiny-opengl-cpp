@@ -2,19 +2,41 @@
 #include "glad/glad.h"
 #include <iostream>
 
-void Triangle::draw() const
+Triangle::Triangle()
 {
+    init();
+}
 
-    unsigned int VAO;
+void Triangle::init()
+{
     glGenVertexArrays(1, &VAO);
-
     glBindVertexArray(VAO);
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f};
+        -0.5f,
+        -0.5f,
+        0.0f,
+        //
+        0.5f,
+        -0.5f,
+        0.0f,
+        //
+        0.0f,
+        0.5f,
+        0.0f,
+        //
+        0.5f,
+        0.5f,
+        0.0f,
+        //
+        0.5f,
+        -0.5f,
+        0.0f,
+        //
+        0.0f,
+        0.5f,
+        0.0f,
+    };
 
-    unsigned int VBO;
     glGenBuffers(1, &VBO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -51,7 +73,7 @@ out vec4 FragColor;
 
 void main()
 {
-    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);
+    FragColor = vec4(1.0f, 0.8f, 0.2f, 1.0f);
 } )";
 
     unsigned int fragmentShader;
@@ -59,7 +81,6 @@ void main()
     glShaderSource(fragmentShader, 1, &fragShader, NULL);
     glCompileShader(fragmentShader);
 
-    unsigned int shaderProgram;
     shaderProgram = glCreateProgram();
 
     glAttachShader(shaderProgram, vertexShader);
@@ -77,10 +98,15 @@ void main()
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    glUseProgram(shaderProgram);
-
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+}
+
+void Triangle::draw() const
+{
+    glUseProgram(shaderProgram);
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }

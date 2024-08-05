@@ -1,8 +1,15 @@
 #include "Mesh.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "stdio.h"
+
+Mesh::Mesh()
+{
+}
 
 void Mesh::load()
+{
+}
+
+void Mesh::init()
 {
 }
 
