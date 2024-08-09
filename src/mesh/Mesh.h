@@ -2,13 +2,14 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "../shader/Shader.h"
 
 class Mesh
 {
 public:
-    Mesh();
+    Mesh(Shader* shader);
     unsigned int VAO, VBO, EBO;
-    unsigned int shaderProgram;
+    Shader* shader;
 
     void load();
     virtual void init();

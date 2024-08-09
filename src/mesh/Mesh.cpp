@@ -1,8 +1,9 @@
 #include "Mesh.h"
 #include "stdio.h"
 
-Mesh::Mesh()
+Mesh::Mesh(Shader* shader)
 {
+    this->shader = shader;
 }
 
 void Mesh::load()
