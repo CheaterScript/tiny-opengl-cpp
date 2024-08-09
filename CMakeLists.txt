@@ -8,6 +8,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
 
+# 资源目录
+file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/out/build)
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+
 # 指定库文件搜索目录
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/GLAD)
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/GLFW)

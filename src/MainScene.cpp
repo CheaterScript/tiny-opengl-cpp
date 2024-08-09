@@ -2,44 +2,18 @@
 #include "Triangle.h"
 #include "shader/Shader.h"
 #include <iostream>
+#include "texture/Texture.h"
 
 MainScene::MainScene() : Scene()
 {
 
-    char *vertexShader = R"(#version 330 core
-layout (location = 0) in vec3 aPos;
+    Texture *texture1 = new Texture("assets/images/container.jpg");
+    Texture *texture2 = new Texture("assets/images/awesomeface.png");
 
-void main()
-{
-    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-})";
-    char *fragmentShader = R"(#version 330 core
-out vec4 FragColor;
+    Shader *shader = new Shader("assets/shaders/vertex.vs", "assets/shaders/fragment.fs");
 
-void main()
-{
-    FragColor = vec4(1.0f, 0.8f, 0.2f, 1.0f);
-} )";
-    Shader *shader = new Shader(vertexShader, fragmentShader);
-
-    char *vertexShader2 = R"(#version 330 core
-layout (location = 0) in vec3 aPos;
-
-void main()
-{
-    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-})";
-    char *fragmentShader2 = R"(#version 330 core
-out vec4 FragColor;
-
-void main()
-{
-    FragColor = vec4(1.0f, 0f, 0f, 1.0f);
-} )";
-    Shader *shader2 = new Shader(vertexShader2, fragmentShader2);
-
-    Mesh *mesh = new Triangle(shader2);
-
+    Mesh *mesh = new Triangle(shader, texture1);
+    mesh->addTexture(texture2);
     this->addChild(*mesh);
 
     int nrAttributes;
