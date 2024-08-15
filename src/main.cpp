@@ -1,7 +1,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "./scene/Scene.h"
+#include "core/scene/Scene.h"
 #include "MainScene.h"
 
 using namespace std;

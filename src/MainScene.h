@@ -1,4 +1,4 @@
-#include "scene/Scene.h"
+#include "core/scene/Scene.h"
 
 class MainScene : public Scene
 {

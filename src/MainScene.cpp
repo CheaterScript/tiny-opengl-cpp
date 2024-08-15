@@ -1,8 +1,8 @@
 #include "MainScene.h"
 #include "Triangle.h"
-#include "shader/Shader.h"
+#include "core/shader/Shader.h"
 #include <iostream>
-#include "texture/Texture.h"
+#include "core/texture/Texture.h"
 
 MainScene::MainScene() : Scene()
 {

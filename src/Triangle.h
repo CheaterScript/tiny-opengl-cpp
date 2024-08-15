@@ -1,6 +1,6 @@
-#include "mesh/Mesh.h"
-#include "shader/Shader.h"
-#include "texture/Texture.h"
+#include "core/mesh/Mesh.h"
+#include "core/shader/Shader.h"
+#include "core/texture/Texture.h"
 
 class Triangle : public Mesh
 {
