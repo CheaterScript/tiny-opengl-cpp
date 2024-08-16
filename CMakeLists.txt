@@ -6,22 +6,17 @@ endif()
 
 project(LearnOpenGL VERSION 0.1.0 LANGUAGES C CXX)
 
-# 引入头文件目录
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+# 添加GLAD库
+add_library(glad STATIC extern/glad/src/glad.c)
+target_include_directories(glad PUBLIC extern/glad/include)
 
-# 搜索源码文件
+# 添加第三方库
+add_subdirectory(extern/glfw)
+add_subdirectory(extern/glm)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
+# 添加子目录
+add_subdirectory(src)
+add_subdirectory(examples)
 
-# 资源目录
-file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/out/build)
-file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
-
-# 指定库文件搜索目录
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/GLAD)
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/GLFW)
-add_executable(LearnOpenGL ${SOURCES})
-target_link_libraries(LearnOpenGL glad)
-target_link_libraries(LearnOpenGL glfw3)
-target_link_libraries(LearnOpenGL glfw3dll)
-
+install(TARGETS rendering_engine DESTINATION lib)
+install(DIRECTORY include/rendering_engine DESTINATION include)
