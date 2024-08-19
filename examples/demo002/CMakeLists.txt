@@ -2,5 +2,5 @@
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp" "src/*.h")
 
 # 定义动态库
-add_executable(demo02 ${SOURCES})
-target_link_libraries(demo02 PUBLIC rendering_engine)
+add_executable(demo002 ${SOURCES})
+target_link_libraries(demo002 PUBLIC rendering_engine)
