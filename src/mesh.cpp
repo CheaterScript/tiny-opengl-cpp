@@ -8,7 +8,7 @@ void Mesh::SetupMesh()
     glGenBuffers(1, &veo_);
     glGenVertexArrays(1, &vao_);
 
-    glBindVertexArray(vao_);
+    Bind();
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_);
     glBufferData(GL_ARRAY_BUFFER, vertices_.size() * sizeof(float), &vertices_[0], GL_STATIC_DRAW);
@@ -19,7 +19,7 @@ void Mesh::SetupMesh()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
 
-    glBindVertexArray(0);
+    Unbind();
 }
 
 Mesh::Mesh(const vector<float> &vertices, const vector<unsigned int> &indices) : vertices_(vertices), indices_(indices)
