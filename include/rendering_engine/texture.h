@@ -4,7 +4,6 @@
 #include "stb_image.h"
 #include <string>
 #include <iostream>
-#include <glad/glad.h>
 
 using namespace std;
 

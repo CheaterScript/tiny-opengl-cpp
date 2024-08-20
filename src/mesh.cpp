@@ -1,5 +1,6 @@
 #include "rendering_engine/mesh.h"
 
+#include <glad/glad.h>
 #include <glfw/glfw3.h>
 
 void Mesh::SetupMesh()
