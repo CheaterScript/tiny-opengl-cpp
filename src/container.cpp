@@ -1,6 +1,11 @@
 #include "rendering_engine/container.h"
 
+Container::Container()
+{
+}
+
 void Container::RemoveAllChildren()
+
 {
     children.clear();
 }

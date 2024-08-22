@@ -6,11 +6,10 @@
 class Container
 {
 private:
-    std::vector<std::shared_ptr<Container>> &children;
+    std::vector<std::shared_ptr<Container>> children;
 
 public:
     Container(/* args */);
-    ~Container();
 
     void RemoveAllChildren();
     void AddChild(std::shared_ptr<Container> child);
