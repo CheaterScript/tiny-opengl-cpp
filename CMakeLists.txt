@@ -22,5 +22,12 @@ add_subdirectory(extern/glm)
 add_subdirectory(src)
 add_subdirectory(examples)
 
+# 复制Assets目录
+add_custom_target(copy_assets ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/bin/assets
+    COMMENT "Copying assets to build directory"
+)
+
 # install(TARGETS rendering_engine DESTINATION lib)
 # install(DIRECTORY include/rendering_engine DESTINATION include)

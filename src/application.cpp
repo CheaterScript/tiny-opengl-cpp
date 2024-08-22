@@ -17,7 +17,7 @@ void Application::run()
     }
 }
 
-Application::Application(const unsigned int width, const unsigned height, char *title) : width_(width), height_(height), title_(title)
+Application::Application(const unsigned int width, const unsigned height, const char *title) : width_(width), height_(height), title_(title)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
