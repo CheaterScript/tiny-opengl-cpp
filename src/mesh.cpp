@@ -3,35 +3,37 @@
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
 
+#include <iostream>
+
 void Mesh::SetupMesh()
 {
-    glGenBuffers(1, &vbo_);
-    glGenBuffers(1, &veo_);
-    glGenVertexArrays(1, &vao_);
 
-    Bind();
+    glGenVertexArrays(1, &vao_);
+    glGenBuffers(1, &vbo_);
+    glGenBuffers(1, &ebo_);
+
+    glBindVertexArray(vao_);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-    glBufferData(GL_ARRAY_BUFFER, vertices_.size() * sizeof(float), &vertices_[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices_->size() * sizeof(float), vertices_->data(), GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ARRAY_BUFFER, veo_);
-    glBufferData(GL_ARRAY_BUFFER, indices_.size() * sizeof(unsigned int), &indices_[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices_->size() * sizeof(unsigned int), indices_->data(), GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
-
-    Unbind();
 }
 
-Mesh::Mesh(const vector<float> &vertices, const vector<unsigned int> &indices) : vertices_(vertices), indices_(indices)
+Mesh::Mesh(const vector<float> &vertices, const vector<unsigned int> &indices) : vertices_(make_shared<vector<float>>(vertices)), indices_(make_shared<vector<unsigned int>>(indices))
 {
     SetupMesh();
 }
 
 Mesh::~Mesh()
 {
+
     glDeleteBuffers(1, &vbo_);
-    glDeleteBuffers(1, &veo_);
+    glDeleteBuffers(1, &ebo_);
     glDeleteVertexArrays(1, &vao_);
 }
 
@@ -47,6 +49,5 @@ void Mesh::Unbind() const
 
 void Mesh::Draw() const
 {
-    Bind();
-    glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices_.size()), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, indices_->size(), GL_UNSIGNED_INT, 0);
 }

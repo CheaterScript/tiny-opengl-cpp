@@ -91,6 +91,7 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) : vertexPath_(v
 
 Shader::~Shader()
 {
+    cout<<"asdasdasd"<<endl;
     glDeleteProgram(id_);
 }
 

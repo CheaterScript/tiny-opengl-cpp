@@ -5,7 +5,7 @@
 
 class Container
 {
-private:
+protected:
     std::vector<std::shared_ptr<Container>> children;
 
 public:
@@ -14,4 +14,5 @@ public:
     void RemoveAllChildren();
     void AddChild(std::shared_ptr<Container> child);
     virtual void Render();
+    virtual void Update(){};
 };

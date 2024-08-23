@@ -5,20 +5,22 @@
 #include <rendering_engine/texture.h>
 #include <rendering_engine/Container.h>
 #include <memory>
+#include <vector>
 
 using namespace std;
 
-class Entity: public Container
+class Entity : public Container
 {
 private:
     /* data */
     shared_ptr<Mesh> mesh_;
     shared_ptr<Shader> shader_;
-    shared_ptr<Texture> texture_;
+    vector<shared_ptr<Texture>> textures_;
 
 public:
-    Entity(const Mesh& mesh, const Shader& shader, const Texture& texture);
+    Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader);
+    Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures_);
     ~Entity();
 
     virtual void Render() override;
-}; 
+};

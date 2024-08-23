@@ -2,7 +2,12 @@
 
 #include <iostream>
 
-void Application::run()
+void debugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
+{
+    std::cout << "Debug message: " << message << std::endl;
+}
+
+void Application::Run()
 {
     while (!glfwWindowShouldClose(window_))
     {
@@ -12,16 +17,35 @@ void Application::run()
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        scene_->Render();
+
+        // GLenum error = glGetError();
+        // if (error != GL_NO_ERROR)
+        // {
+        //     std::cerr << "OpenGL Error: " << error << std::endl;
+        // }
+
         glfwSwapBuffers(window_);
         glfwPollEvents();
     }
 }
 
-Application::Application(const unsigned int width, const unsigned height, const char *title) : width_(width), height_(height), title_(title)
+Container &Application::getScene()
 {
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    return *scene_;
+}
+
+Application::Application(const unsigned int width, const unsigned height, const char *title) : width_(width), height_(height), title_(title), scene_(std::make_unique<Container>())
+{
+
+    if (!glfwInit())
+    {
+        std::cerr << "Failed to initialize GLFW" << std::endl;
+        throw std::runtime_error("Failed to initialize GLFW");
+    }
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 #ifdef __APPLE__
@@ -37,7 +61,6 @@ Application::Application(const unsigned int width, const unsigned height, const 
     }
 
     glfwMakeContextCurrent(window_);
-    glfwSetFramebufferSizeCallback(window_, Application::FramebufferSizeCallback);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -45,6 +68,11 @@ Application::Application(const unsigned int width, const unsigned height, const 
         glfwTerminate();
         throw std::runtime_error("Failed to initialize GLAD");
     }
+    glfwSetFramebufferSizeCallback(window_, Application::FramebufferSizeCallback);
+
+    glEnable(GL_DEBUG_OUTPUT);
+    glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+    glDebugMessageCallback(debugCallback, nullptr);
 }
 
 Application::~Application()

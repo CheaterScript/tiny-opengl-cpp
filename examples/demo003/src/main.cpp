@@ -11,6 +11,6 @@ const unsigned int SCR_HEIGHT = 600;
 int main()
 {
     Application *app = new Application(SCR_WIDTH, SCR_HEIGHT, const_cast<char *>("LearningOpenGL"));
-    app->run();
+    app->Run();
     return 0;
 }

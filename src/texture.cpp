@@ -16,6 +16,7 @@ void Texture::Bind() const
 {
     glBindTexture(GL_TEXTURE_2D, id_);
 }
+
 void Texture::Load()
 {
     glGenTextures(1, &id_);

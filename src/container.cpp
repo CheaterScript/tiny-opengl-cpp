@@ -1,5 +1,7 @@
 #include "rendering_engine/container.h"
 
+#include <iostream>
+
 Container::Container()
 {
 }
@@ -17,6 +19,8 @@ void Container::AddChild(std::shared_ptr<Container> child)
 
 void Container::Render()
 {
+    Update();
+
     for (auto child : children)
     {
         child->Render();
