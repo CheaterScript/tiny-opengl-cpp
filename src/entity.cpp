@@ -17,23 +17,20 @@ Entity::~Entity()
 }
 void Entity::Render()
 {
-    // unsigned int index = GL_TEXTURE0;
-    // for (auto texture : textures_)
-    // {
-    //     glActiveTexture(index);
-    //     texture->Bind();
-    //     index++;
-    // }
+    unsigned int index = GL_TEXTURE0;
+    for (auto texture : textures_)
+    {
+        glActiveTexture(index);
+        texture->Bind();
+        index++;
+    }
 
     shader_->Use();
-    // mesh_->Bind();// seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-    // glDrawArrays(GL_TRIANGLES, 0, 6);
-    // glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     mesh_->Bind();
     mesh_->Draw();
 
     for (auto child : children)
     {
-        child->Render();
+        child->Render(); 
     }
 }
