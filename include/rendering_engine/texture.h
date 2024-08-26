@@ -19,4 +19,5 @@ public:
     ~Texture();
 
     void Bind() const;
+    const std::string &getUniformName() const;
 };

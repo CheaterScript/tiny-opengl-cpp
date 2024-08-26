@@ -3,13 +3,13 @@
 #include "rendering_engine/texture.h"
 #include <glad/glad.h>
 
-Texture::Texture(const string &path) : Texture(path, "")
+Texture::Texture(const string &path) : Texture(path, NULL)
 {
-    Load();
 }
 
 Texture::Texture(const string &path, const string &uniformName) : path_(path), uniformName_(uniformName)
 {
+        Load();
 }
 Texture::~Texture()
 {
@@ -18,6 +18,11 @@ Texture::~Texture()
 void Texture::Bind() const
 {
     glBindTexture(GL_TEXTURE_2D, id_);
+}
+
+const std::string &Texture::getUniformName() const
+{
+    return uniformName_;
 }
 
 void Texture::Load()
