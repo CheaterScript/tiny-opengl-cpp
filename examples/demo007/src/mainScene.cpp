@@ -18,11 +18,12 @@ MainScene::~MainScene()
 void MainScene::Init()
 {
     vector<float> vertices = {
-        0.5f, 0.5f, 0.0f,   // 右上角
-        0.5f, -0.5f, 0.0f,  // 右下角
-        -0.5f, -0.5f, 0.0f, // 左下角
-        -0.5f, 0.5f, 0.0f   // 左上角
-    };
+    //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
+     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
+    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
+    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
+};
 
     vector<unsigned int> indices = {
         // 注意索引从0开始!
@@ -34,7 +35,7 @@ void MainScene::Init()
     };
 
     shared_ptr<Mesh> mesh = make_shared<Mesh>(vertices, indices);
-    shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/vShader.glsl", "assets/shaders/fShader.glsl");
+    shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/simpleTextureVShader.glsl", "assets/shaders/simpleTextureFShader.glsl");
     shared_ptr<Texture> texture = make_shared<Texture>("assets/images/container.jpg");
 
     vector<shared_ptr<Texture>> *const textures = new vector<shared_ptr<Texture>>();
