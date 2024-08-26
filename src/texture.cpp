@@ -3,11 +3,14 @@
 #include "rendering_engine/texture.h"
 #include <glad/glad.h>
 
-Texture::Texture(const string &path) : path_(path)
+Texture::Texture(const string &path) : Texture(path, "")
 {
     Load();
 }
 
+Texture::Texture(const string &path, const string &uniformName) : path_(path), uniformName_(uniformName)
+{
+}
 Texture::~Texture()
 {
 }
