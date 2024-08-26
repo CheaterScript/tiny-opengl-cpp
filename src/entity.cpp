@@ -10,6 +10,7 @@ Entity::Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader) : E
 
 Entity::Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures) : Container(), mesh_(mesh), shader_(shader), textures_(textures)
 {
+    transform_ = glm::mat4(1.0f);
 }
 
 Entity::~Entity()

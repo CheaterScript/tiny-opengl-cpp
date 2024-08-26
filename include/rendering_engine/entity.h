@@ -6,6 +6,9 @@
 #include <rendering_engine/Container.h>
 #include <memory>
 #include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace std;
 
@@ -16,6 +19,7 @@ private:
     shared_ptr<Mesh> mesh_;
     shared_ptr<Shader> shader_;
     vector<shared_ptr<Texture>> textures_;
+    glm::mat4 transform_;
 
 public:
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader);
