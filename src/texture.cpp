@@ -3,7 +3,7 @@
 #include "rendering_engine/texture.h"
 #include <glad/glad.h>
 
-Texture::Texture(const string &path) : Texture(path, NULL)
+Texture::Texture(const string &path) : Texture(path, "")
 {
 }
 

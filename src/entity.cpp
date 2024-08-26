@@ -17,20 +17,23 @@ Entity::~Entity()
 }
 void Entity::Render()
 {
+    shader_->Use();
     unsigned int index = GL_TEXTURE0;
     for (auto texture : textures_)
     {
         glActiveTexture(index);
         texture->Bind();
+        if (texture->getUniformName() != "")
+        {
+            shader_->SetInt(texture->getUniformName(), index);
+        }
         index++;
     }
-
-    shader_->Use();
     mesh_->Bind();
     mesh_->Draw();
 
     for (auto child : children)
     {
-        child->Render(); 
+        child->Render();
     }
 }
