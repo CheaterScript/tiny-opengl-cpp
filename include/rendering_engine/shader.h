@@ -12,6 +12,8 @@ private:
     unsigned id_;
     const char *vertexPath_, *fragmentPath_;
     const char *vShaderCode_, *fShaderCode_;
+    string vertexCode;
+    string fragmentCode;
 
 public:
     Shader(const char *vertexPath, const char *fragmentPath);

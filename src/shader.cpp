@@ -7,8 +7,6 @@
 
 void Shader::Load()
 {
-    string vertexCode;
-    string fragmentCode;
     ifstream vShaderFile;
     ifstream fShaderFile;
     vShaderFile.exceptions(ifstream::failbit | ifstream::badbit);
@@ -40,7 +38,7 @@ void Shader::CompileShader()
 {
     unsigned int vertex, fragment;
     int bIsSuccess;
-    char errorInfo[512];
+    char errorInfo[512];   
 
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vShaderCode_, NULL);
@@ -91,7 +89,6 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) : vertexPath_(v
 
 Shader::~Shader()
 {
-    cout<<"asdasdasd"<<endl;
     glDeleteProgram(id_);
 }
 
