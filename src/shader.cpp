@@ -38,7 +38,7 @@ void Shader::CompileShader()
 {
     unsigned int vertex, fragment;
     int bIsSuccess;
-    char errorInfo[512];   
+    char errorInfo[512];
 
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vShaderCode_, NULL);
@@ -108,4 +108,8 @@ void Shader::SetInt(const string &name, int value) const
 void Shader::SetFloat(const string &name, float value) const
 {
     glUniform1f(glGetUniformLocation(id_, name.c_str()), value);
+}
+void Shader::SetMat4(const string &name, glm::mat4 value) const
+{
+    glUniformMatrix4fv(glGetUniformLocation(id_, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }

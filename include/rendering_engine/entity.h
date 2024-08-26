@@ -27,4 +27,5 @@ public:
     ~Entity();
 
     virtual void Render() override;
+    void setTransform(const glm::mat4 &transform);
 };

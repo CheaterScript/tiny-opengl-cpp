@@ -19,6 +19,7 @@ Entity::~Entity()
 void Entity::Render()
 {
     shader_->Use();
+    shader_->SetMat4("transform", transform_);
     unsigned int index = GL_TEXTURE0;
     for (auto texture : textures_)
     {
@@ -37,4 +38,9 @@ void Entity::Render()
     {
         child->Render();
     }
+}
+
+void Entity::setTransform(const glm::mat4 &transform)
+{
+    transform_ = transform;
 }
