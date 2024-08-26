@@ -25,7 +25,7 @@ void Entity::Render()
         texture->Bind();
         if (texture->getUniformName() != "")
         {
-            shader_->SetInt(texture->getUniformName(), index);
+            shader_->SetInt(texture->getUniformName(), index - GL_TEXTURE0);
         }
         index++;
     }
