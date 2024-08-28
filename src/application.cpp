@@ -15,7 +15,7 @@ void Application::Run()
         ProcessInput();
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         scene_->Render();
 
@@ -73,6 +73,8 @@ Application::Application(const unsigned int width, const unsigned height, const 
     glEnable(GL_DEBUG_OUTPUT);
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
     glDebugMessageCallback(debugCallback, nullptr);
+
+    glEnable(GL_DEPTH_TEST);
 }
 
 Application::~Application()
