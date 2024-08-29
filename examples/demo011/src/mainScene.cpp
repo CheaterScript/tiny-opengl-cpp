@@ -76,8 +76,7 @@ void MainScene::Init()
         18, 19, 16,
         // 下面
         20, 21, 22,
-        22, 23, 20
-    };
+        22, 23, 20};
 
     shared_ptr<Mesh> mesh = make_shared<Mesh>(vertices, indices);
     shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/transformVShader.glsl", "assets/shaders/transformFShader.glsl");
@@ -96,7 +95,6 @@ void MainScene::Init()
 void MainScene::Update()
 {
     glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-
-    box->(trans);
+    box->rotation = glm::vec3((float)glfwGetTime()*50, (float)glfwGetTime()*50, (float)glfwGetTime()*50);
+    box->scale = glm::vec3(0.5f);
 }
