@@ -28,10 +28,6 @@ public:
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures_);
     ~Entity();
 
-    glm::vec3 location;
-    glm::vec3 rotation;
-    glm::vec3 scale;
-
     virtual void Render() override;
     void setTransform(const glm::mat4 &transform);
 };
