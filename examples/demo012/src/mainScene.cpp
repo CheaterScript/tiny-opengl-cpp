@@ -89,12 +89,18 @@ void MainScene::Init()
     textures->push_back(texture2);
 
     box = make_shared<Entity>(mesh, shader, *textures);
+    box2 = make_shared<Entity>(mesh, shader, *textures);
     AddChild(box);
+    AddChild(box2);
 }
 
 void MainScene::Update()
 {
     glm::mat4 trans = glm::mat4(1.0f);
-    box->rotation = glm::vec3((float)glfwGetTime()*50, (float)glfwGetTime()*50, (float)glfwGetTime()*50);
+    box->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
     box->scale = glm::vec3(0.5f);
+
+    box2->location = glm::vec3(0.2,0,-1);
+    box2->scale = glm::vec3(0.2f);
+    box2->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
 }

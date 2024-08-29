@@ -6,11 +6,13 @@
 
 using namespace std;
 
-class MainScene: public Container
+class MainScene : public Container
 {
 private:
     /* data */
-     shared_ptr<Entity> box;
+    shared_ptr<Entity> box;
+    shared_ptr<Entity> box2;
+
 public:
     MainScene(/* args */);
     ~MainScene();
