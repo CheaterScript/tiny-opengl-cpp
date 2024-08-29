@@ -19,7 +19,7 @@ private:
     shared_ptr<Mesh> mesh_;
     shared_ptr<Shader> shader_;
     vector<shared_ptr<Texture>> textures_;
-    glm::mat4 transform_;
+    glm::mat4 worldTransform_;
 
     void UpdateTransform();
 

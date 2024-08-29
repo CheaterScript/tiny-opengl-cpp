@@ -10,7 +10,7 @@ Entity::Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader) : E
 
 Entity::Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures) : Container(), mesh_(mesh), shader_(shader), textures_(textures)
 {
-    transform_ = glm::mat4(1.0f);
+    worldTransform_ = glm::mat4(1.0f);
 }
 
 Entity::~Entity()
@@ -18,8 +18,9 @@ Entity::~Entity()
 }
 void Entity::Render()
 {
+    UpdateTransform();
     shader_->Use();
-    shader_->SetMat4("transform", transform_);
+    shader_->SetMat4("transform", worldTransform_);
     unsigned int index = GL_TEXTURE0;
     for (auto texture : textures_)
     {
@@ -42,7 +43,7 @@ void Entity::Render()
 
 void Entity::setTransform(const glm::mat4 &transform)
 {
-    transform_ = transform;
+    worldTransform_ = transform;
 }
 
 void Entity::UpdateTransform()
