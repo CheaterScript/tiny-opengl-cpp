@@ -4,6 +4,10 @@
 #include <glfw/glfw3.h>
 #include <iostream>
 
+Entity::Entity()
+{
+}
+
 Entity::Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader) : Entity(mesh, shader, std::vector<std::shared_ptr<Texture>>{})
 {
 }

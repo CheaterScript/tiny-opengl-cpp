@@ -34,6 +34,12 @@ void Container::setTransform(const glm::mat4 &transform)
     worldTransform_ = transform;
 }
 
+const glm::mat4 &Container::getWorldTransform()
+{
+    UpdateTransform();
+    return worldTransform_;
+}
+
 void Container::UpdateTransform()
 {
     glm::mat4 trans = glm::mat4(1.0f);

@@ -29,4 +29,5 @@ public:
     virtual void Update() {};
 
     void setTransform(const glm::mat4 &transform);
+    const glm::mat4 &getWorldTransform();
 };

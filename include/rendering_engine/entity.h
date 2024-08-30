@@ -20,6 +20,7 @@ private:
     shared_ptr<Shader> shader_;
     vector<shared_ptr<Texture>> textures_;
 public:
+    Entity();
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader);
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures_);
     ~Entity();
