@@ -12,6 +12,8 @@ protected:
     std::vector<std::shared_ptr<Container>> children;
     glm::mat4 worldTransform_;
 
+    void UpdateTransform();
+
 public:
     Container(/* args */);
 
@@ -22,7 +24,9 @@ public:
     std::shared_ptr<Container> parent;
 
     void RemoveAllChildren();
-    void AddChild(std::shared_ptr<Container> child);
+    void AddChild(const std::shared_ptr<Container> &child);
     virtual void Render();
     virtual void Update() {};
+
+    void setTransform(const glm::mat4 &transform);
 };

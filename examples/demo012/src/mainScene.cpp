@@ -12,11 +12,11 @@
 
 MainScene::MainScene()
 {
-    Init();
 }
 
 MainScene::~MainScene()
 {
+    cout << "dddddddddddddddddddddd" << endl;
 }
 
 void MainScene::Init()
@@ -91,7 +91,9 @@ void MainScene::Init()
     box = make_shared<Entity>(mesh, shader, *textures);
     box2 = make_shared<Entity>(mesh, shader, *textures);
     AddChild(box);
-    AddChild(box2);
+    // AddChild(box2);
+
+    delete textures;
 }
 
 void MainScene::Update()
@@ -100,7 +102,7 @@ void MainScene::Update()
     box->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
     box->scale = glm::vec3(0.5f);
 
-    box2->location = glm::vec3(0.2,0,-1);
+    box2->location = glm::vec3(0.2, 0, -1);
     box2->scale = glm::vec3(0.2f);
     box2->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
 }

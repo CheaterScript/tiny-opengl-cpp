@@ -43,20 +43,3 @@ void Entity::Render()
         child->Render();
     }
 }
-
-void Entity::setTransform(const glm::mat4 &transform)
-{
-    worldTransform_ = transform;
-}
-
-void Entity::UpdateTransform()
-{
-    glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::translate(trans, location);
-    glm::quat quaternion = glm::quat(glm::radians(rotation));
-    glm::mat4 rotationMatrix = glm::mat4_cast(quaternion);
-    trans = trans * rotationMatrix;
-    trans = glm::scale(trans, scale);
-
-    setTransform(trans);
-}

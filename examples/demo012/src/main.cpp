@@ -14,11 +14,12 @@ const unsigned int SCR_HEIGHT = 600;
 
 int main()
 {
-    Application *app = new Application(SCR_WIDTH, SCR_HEIGHT, "LearningOpenGL");
+    auto *app = new Application(SCR_WIDTH, SCR_HEIGHT, "LearningOpenGL");
 
-    shared_ptr<MainScene> mainScene = make_shared<MainScene>();
-
+    auto mainScene = make_shared<MainScene>();
+    mainScene->Init();
     app->getScene().AddChild(mainScene);
     app->Run();
     return 0;
 }
+  

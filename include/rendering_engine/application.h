@@ -11,7 +11,7 @@ private:
     unsigned int width_, height_;
     const char *title_;
     GLFWwindow *window_;
-    std::unique_ptr<Container> scene_;
+    std::shared_ptr<Container> scene_;
 
     void ProcessInput();
     static void FramebufferSizeCallback(GLFWwindow *window, int width, int height);

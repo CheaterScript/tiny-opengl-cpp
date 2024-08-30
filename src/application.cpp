@@ -35,7 +35,7 @@ Container &Application::getScene()
     return *scene_;
 }
 
-Application::Application(const unsigned int width, const unsigned height, const char *title) : width_(width), height_(height), title_(title), scene_(std::make_unique<Container>())
+Application::Application(const unsigned int width, const unsigned height, const char *title) : width_(width), height_(height), title_(title), scene_(std::make_shared<Container>())
 {
 
     if (!glfwInit())

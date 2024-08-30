@@ -19,15 +19,10 @@ private:
     shared_ptr<Mesh> mesh_;
     shared_ptr<Shader> shader_;
     vector<shared_ptr<Texture>> textures_;
-    glm::mat4 worldTransform_;
-
-    void UpdateTransform();
-
 public:
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader);
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures_);
     ~Entity();
 
     virtual void Render() override;
-    void setTransform(const glm::mat4 &transform);
 };
