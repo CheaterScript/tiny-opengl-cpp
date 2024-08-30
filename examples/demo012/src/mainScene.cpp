@@ -91,7 +91,7 @@ void MainScene::Init()
     box = make_shared<Entity>(mesh, shader, *textures);
     box2 = make_shared<Entity>(mesh, shader, *textures);
     AddChild(box);
-    // AddChild(box2);
+    AddChild(box2);
 
     delete textures;
 }
