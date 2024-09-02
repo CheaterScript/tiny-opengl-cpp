@@ -16,10 +16,12 @@ int main()
 {
     auto *app = new Application(SCR_WIDTH, SCR_HEIGHT, "LearningOpenGL");
     // app->ShowMouseCursor(false);
+    app->eventManager.AddListener(EventType::MouseEvent, [](Event *event)
+                                  { MouseEvent *mouseEvent = static_cast<MouseEvent *>(event);
+                                  cout << mouseEvent->x<<endl; });
     auto mainScene = make_shared<MainScene>();
     mainScene->Init();
     app->getScene().AddChild(mainScene);
     app->Run();
     return 0;
 }
-  
