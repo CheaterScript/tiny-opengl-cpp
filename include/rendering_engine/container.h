@@ -16,6 +16,7 @@ protected:
 
 public:
     Container(/* args */);
+    virtual ~Container() = default;
 
     glm::vec3 location;
     glm::vec3 rotation;
