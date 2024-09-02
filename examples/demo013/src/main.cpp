@@ -15,7 +15,7 @@ const unsigned int SCR_HEIGHT = 600;
 int main()
 {
     auto *app = new Application(SCR_WIDTH, SCR_HEIGHT, "LearningOpenGL");
-
+    // app->ShowMouseCursor(false);
     auto mainScene = make_shared<MainScene>();
     mainScene->Init();
     app->getScene().AddChild(mainScene);

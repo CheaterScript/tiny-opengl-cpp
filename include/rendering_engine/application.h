@@ -22,4 +22,5 @@ public:
 
     void Run();
     Container & getScene();
+    void ShowMouseCursor(bool bIsShow);
 };

@@ -1,10 +1,49 @@
 #include "rendering_engine/application.h"
 
 #include <iostream>
+#include <Windows.h>
 
+#if defined(_WIN32)
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
+#include <Windows.h>
+#endif
 void debugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
 {
     std::cout << "Debug message: " << message << std::endl;
+}
+
+void SetWindowTransparent(GLFWwindow *window)
+{
+    HWND hwnd = glfwGetWin32Window(window);
+
+    // 设置窗口样式为层叠
+    LONG style = GetWindowLong(hwnd, GWL_EXSTYLE);
+    SetWindowLong(hwnd, GWL_EXSTYLE, style | WS_EX_LAYERED);
+
+    // 设置窗口背景透明
+    BYTE alpha = 0; // 完全透明
+    SetLayeredWindowAttributes(hwnd, 0, alpha, LWA_COLORKEY);
+
+    // 将窗口置顶
+    SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+
+#if defined(_WIN32)
+    // 获取屏幕分辨率
+    RECT desktop;
+    const HWND hDesktop = GetDesktopWindow();
+    GetWindowRect(hDesktop, &desktop);
+
+    int screenWidth = desktop.right;
+    int screenHeight = desktop.bottom;
+
+    // 计算右下角的位置
+    int xPos = screenWidth - 800;
+    int yPos = screenHeight - 600;
+
+    // 设置窗口位置
+    glfwSetWindowPos(window, xPos, yPos);
+#endif
 }
 
 void Application::Run()
@@ -14,7 +53,7 @@ void Application::Run()
 
         ProcessInput();
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         scene_->Render();
@@ -35,6 +74,12 @@ Container &Application::getScene()
     return *scene_;
 }
 
+void Application::ShowMouseCursor(bool bIsShow)
+{
+
+    glfwSetInputMode(window_, GLFW_CURSOR, bIsShow ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+}
+
 Application::Application(const unsigned int width, const unsigned height, const char *title) : width_(width), height_(height), title_(title), scene_(std::make_shared<Container>())
 {
 
@@ -47,7 +92,7 @@ Application::Application(const unsigned int width, const unsigned height, const 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
@@ -75,6 +120,10 @@ Application::Application(const unsigned int width, const unsigned height, const 
     glDebugMessageCallback(debugCallback, nullptr);
 
     glEnable(GL_DEPTH_TEST);
+
+#if defined(_WIN32)
+    SetWindowTransparent(window_);
+#endif
 }
 
 Application::~Application()
