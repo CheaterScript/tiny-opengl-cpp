@@ -7,6 +7,8 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
 #include <Windows.h>
+#include "rendering_engine/eventManager.h"
+
 #endif
 void debugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
 {
@@ -113,7 +115,10 @@ Application::Application(const unsigned int width, const unsigned height, const 
         glfwTerminate();
         throw std::runtime_error("Failed to initialize GLAD");
     }
+
+    glfwSetWindowUserPointer(window_, this);
     glfwSetFramebufferSizeCallback(window_, Application::FramebufferSizeCallback);
+    glfwSetCursorPosCallback(window_, Application::MouseCallBack);
 
     glEnable(GL_DEBUG_OUTPUT);
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
@@ -144,4 +149,14 @@ void Application::FramebufferSizeCallback(GLFWwindow *window, int width, int hei
     // make sure the viewport matches the new window dimensions; note that width and
     // height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
+}
+
+void Application::MouseCallBack(GLFWwindow *window, double xpos, double ypos)
+{
+    Application *app = static_cast<Application *>(glfwGetWindowUserPointer(window));
+    if (app)
+    {
+        MouseEvent e(xpos, ypos);
+        app->eventManager.DispatchEvent(EventType::MouseEvent, &e);
+    }
 }
