@@ -40,8 +40,8 @@ class EventManager
 private:
     /* data */
 public:
-    EventManager(/* args */);
-    ~EventManager();
+    EventManager(/* args */){};
+    virtual ~EventManager() = default;
 
     void AddListener(EventType eventType, EventHandler handler);
     void RemoveListener(EventType eventType, EventHandler handler);

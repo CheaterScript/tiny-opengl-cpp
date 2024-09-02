@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rendering_engine/container.h"
+#include "rendering_engine/eventManager.h"
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
 #include <memory>
@@ -19,6 +20,8 @@ private:
 public:
     Application(const unsigned int width, const unsigned height, const char *title);
     ~Application();
+
+    EventManager eventManager;
 
     void Run();
     Container & getScene();
