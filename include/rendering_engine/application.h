@@ -2,6 +2,7 @@
 
 #include "rendering_engine/container.h"
 #include "rendering_engine/eventManager.h"
+#include "rendering_engine/camera.h"
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
 #include <memory>
@@ -13,6 +14,7 @@ private:
     const char *title_;
     GLFWwindow *window_;
     std::shared_ptr<Container> scene_;
+    std::shared_ptr<Camera> mainCamera_;
 
     void ProcessInput();
     static void FramebufferSizeCallback(GLFWwindow *window, int width, int height);
@@ -27,4 +29,6 @@ public:
     void Run();
     Container &getScene();
     void ShowMouseCursor(bool bIsShow);
+    void setMainCamera(std::shared_ptr<Camera> camera);
+    std::shared_ptr<Camera> getMainCamera();
 };

@@ -1,14 +1,11 @@
 #include "rendering_engine/application.h"
-
+#include "rendering_engine/eventManager.h"
 #include <iostream>
-#include <Windows.h>
 
-#if defined(_WIN32)
+#if defined(_WIN64)
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
 #include <Windows.h>
-#include "rendering_engine/eventManager.h"
-
 #endif
 void debugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
 {
@@ -80,6 +77,16 @@ void Application::ShowMouseCursor(bool bIsShow)
 {
 
     glfwSetInputMode(window_, GLFW_CURSOR, bIsShow ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
+}
+
+void Application::setMainCamera(std::shared_ptr<Camera> camera)
+{
+    mainCamera_ = camera;
+}
+
+std::shared_ptr<Camera> Application::getMainCamera()
+{
+    return mainCamera_;
 }
 
 Application::Application(const unsigned int width, const unsigned height, const char *title) : width_(width), height_(height), title_(title), scene_(std::make_shared<Container>())
