@@ -4,6 +4,7 @@
 
 #if defined(_WIN64)
 #define GLFW_EXPOSE_NATIVE_WIN32
+#define WIN32_LEAN_AND_MEAN
 #include <GLFW/glfw3native.h>
 #include <Windows.h>
 #endif
