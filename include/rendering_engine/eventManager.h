@@ -30,7 +30,8 @@ class KeyEvent : public Event
 {
 public:
     int keyCode;
-    KeyEvent(int keyCode) : keyCode(keyCode), Event(EventType::KeyEvent) {}
+    int action;
+    KeyEvent(int keyCode, int action) : keyCode(keyCode), action(action), Event(EventType::KeyEvent) {}
 };
 
 using EventHandler = std::function<void(Event *)>;
@@ -40,7 +41,7 @@ class EventManager
 private:
     /* data */
 public:
-    EventManager(/* args */){};
+    EventManager(/* args */) {};
     virtual ~EventManager() = default;
 
     void AddListener(EventType eventType, EventHandler handler);

@@ -20,7 +20,7 @@ int main()
                                   { MouseEvent *mouseEvent = static_cast<MouseEvent *>(event);
                                   cout << mouseEvent->x<<endl; });
     auto mainScene = make_shared<MainScene>();
-    mainScene->Init();
+    mainScene->Init(app);
     app->getScene().AddChild(mainScene);
     app->Run();
     return 0;

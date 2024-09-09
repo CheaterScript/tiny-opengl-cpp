@@ -18,7 +18,8 @@ private:
 
     void ProcessInput();
     static void FramebufferSizeCallback(GLFWwindow *window, int width, int height);
-    static void MouseCallBack(GLFWwindow *window, double xpos, double ypos);
+    static void MouseCallback(GLFWwindow *window, double xpos, double ypos);
+    static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 public:
     Application(const unsigned int width, const unsigned height, const char *title);

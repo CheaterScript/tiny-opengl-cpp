@@ -3,6 +3,7 @@
 #include <vector>
 #include "rendering_engine/shader.h"
 #include "rendering_engine/texture.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -18,7 +19,7 @@ MainScene::~MainScene()
 {
 }
 
-void MainScene::Init()
+void MainScene::Init(Application *app)
 {
     vector<float> vertices = {
         // 前面
@@ -87,21 +88,34 @@ void MainScene::Init()
     textures->push_back(texture1);
     textures->push_back(texture2);
 
-    box = make_shared<Entity>(mesh, shader, *textures);
-    box2 = make_shared<Entity>(mesh, shader, *textures);
-    AddChild(box);
-    AddChild(box2);
+    box_ = make_shared<Entity>(mesh, shader, *textures);
+    box2_ = make_shared<Entity>(mesh, shader, *textures);
+    AddChild(box_);
+    AddChild(box2_);
+
+    camera_ = make_shared<Camera>();
+    camera_->location = glm::vec3(0, 0, 10.0f);
+    AddChild(camera_);
+    app->setMainCamera(camera_);
+
+    app->eventManager.AddListener(EventType::KeyEvent, [](Event *event)
+                                  { KeyEvent *keyEvent = static_cast<KeyEvent *>(event);
+                                  cout << keyEvent->keyCode << "----" <<  keyEvent->action << endl; });
 
     delete textures;
 }
 
 void MainScene::Update()
 {
-    glm::mat4 trans = glm::mat4(1.0f);
-    box->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
-    box->scale = glm::vec3(0.5f);
+    // glm::mat4 trans = glm::mat4(1.0f);
+    // box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    // box_->scale = glm::vec3(0.5f);
 
-    box2->location = glm::vec3(0.2, 0, -0.5);
-    box2->scale = glm::vec3(0.2f);
-    box2->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    // box2_->location = glm::vec3(0.2, 0, -0.5);
+    // box2_->scale = glm::vec3(0.2f);
+    // box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+
+    // cout << sin((float)glfwGetTime()) << endl;
+    camera_->location = glm::vec3(0, 0, 5);
+    camera_->rotation = glm::vec3(sin((float)glfwGetTime()) * 15, 0,0);
 }

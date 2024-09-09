@@ -141,7 +141,8 @@ Application::Application(const unsigned int width, const unsigned height, const 
 
     glfwSetWindowUserPointer(window_, this);
     glfwSetFramebufferSizeCallback(window_, Application::FramebufferSizeCallback);
-    glfwSetCursorPosCallback(window_, Application::MouseCallBack);
+    glfwSetCursorPosCallback(window_, Application::MouseCallback);
+    glfwSetKeyCallback(window_, Application::KeyCallback);
 
     glEnable(GL_DEBUG_OUTPUT);
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
@@ -174,12 +175,21 @@ void Application::FramebufferSizeCallback(GLFWwindow *window, int width, int hei
     glViewport(0, 0, width, height);
 }
 
-void Application::MouseCallBack(GLFWwindow *window, double xpos, double ypos)
+void Application::MouseCallback(GLFWwindow *window, double xpos, double ypos)
 {
     Application *app = static_cast<Application *>(glfwGetWindowUserPointer(window));
     if (app)
     {
         MouseEvent e(xpos, ypos);
         app->eventManager.DispatchEvent(EventType::MouseEvent, &e);
+    }
+}
+void Application::KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
+{
+    Application *app = static_cast<Application *>(glfwGetWindowUserPointer(window));
+    if (app)
+    {
+        KeyEvent e(key, action);
+        app->eventManager.DispatchEvent(EventType::KeyEvent, &e);
     }
 }
