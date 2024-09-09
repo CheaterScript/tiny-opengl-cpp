@@ -28,7 +28,7 @@ public:
     void RemoveAllChildren();
     void AddChild(const std::shared_ptr<Container> &child);
     virtual void Render(RenderingContext renderingContext);
-    virtual void Update() {};
+    virtual void Update(float deltaTime) {};
 
     void setTransform(const glm::mat4 &transform);
     const glm::mat4 &getWorldTransform();

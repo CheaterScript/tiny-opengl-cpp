@@ -105,15 +105,15 @@ void MainScene::Init(Application *app)
     delete textures;
 }
 
-void MainScene::Update()
+void MainScene::Update(float deltaTime)
 {
-    // glm::mat4 trans = glm::mat4(1.0f);
-    // box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
-    // box_->scale = glm::vec3(0.5f);
+    glm::mat4 trans = glm::mat4(1.0f);
+    box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    box_->scale = glm::vec3(0.5f);
 
-    // box2_->location = glm::vec3(0.2, 0, -0.5);
-    // box2_->scale = glm::vec3(0.2f);
-    // box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    box2_->location = glm::vec3(1, 0, -0.5);
+    box2_->scale = glm::vec3(0.2f);
+    box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
 
     // cout << sin((float)glfwGetTime()) << endl;
     camera_->location = glm::vec3(0, 0, 5);

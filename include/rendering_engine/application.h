@@ -10,6 +10,7 @@
 class Application
 {
 private:
+    float lastTime = 0.0f;
     unsigned int width_, height_;
     const char *title_;
     GLFWwindow *window_;

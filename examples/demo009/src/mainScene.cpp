@@ -52,7 +52,7 @@ void MainScene::Init()
     AddChild(box);
 }
 
-void MainScene::Update()
+void MainScene::Update(float deltaTime)
 {
     glm::mat4 trans = glm::mat4(1.0f);
     trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));

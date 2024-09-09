@@ -20,7 +20,7 @@ void Container::AddChild(const std::shared_ptr<Container> &child)
 
 void Container::Render(RenderingContext renderingContext)
 {
-    Update();
+    Update(renderingContext.deltaTime);
 
     for (auto child : children)
     {

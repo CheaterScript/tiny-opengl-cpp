@@ -78,8 +78,13 @@ Container &Application::getScene()
 
 void Application::Render()
 {
+    float currentTime = glfwGetTime();
+    float deltaTime = currentTime - lastTime;
+    lastTime = currentTime;
+
     // 创建上下文
     RenderingContext renderingContext;
+    renderingContext.deltaTime = deltaTime;
     if (mainCamera_)
     {
         renderingContext.viewMatrix = mainCamera_->GetViewMatrix();

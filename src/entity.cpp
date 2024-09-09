@@ -26,6 +26,7 @@ Entity::~Entity()
 
 void Entity::Render(RenderingContext renderingContext)
 {
+    Update(renderingContext.deltaTime);
     UpdateTransform();
     shader_->Use();
     shader_->SetMat4("transform", worldTransform_);

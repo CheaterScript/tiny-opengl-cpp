@@ -18,5 +18,5 @@ public:
     ~MainScene();
 
     void Init();
-    void Update() override;
+    void Update(float deltaTime) override;
 };
