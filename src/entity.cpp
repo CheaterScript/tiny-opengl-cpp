@@ -29,6 +29,8 @@ void Entity::Render(RenderingContext renderingContext)
     UpdateTransform();
     shader_->Use();
     shader_->SetMat4("transform", worldTransform_);
+    shader_->SetMat4("viewMatrix", renderingContext.viewMatrix);
+    shader_->SetMat4("projectionMatrix", renderingContext.projectionMatrix);
     unsigned int index = GL_TEXTURE0;
     for (auto texture : textures_)
     {

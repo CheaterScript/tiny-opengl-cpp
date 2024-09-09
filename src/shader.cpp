@@ -50,6 +50,7 @@ void Shader::CompileShader()
         glGetShaderInfoLog(vertex, 512, NULL, &errorInfo[0]);
         std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n"
                   << errorInfo << std::endl;
+        throw std::runtime_error("Shader has errors!");
     }
 
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
@@ -62,6 +63,7 @@ void Shader::CompileShader()
         glGetShaderInfoLog(fragment, 512, NULL, errorInfo);
         std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n"
                   << errorInfo << std::endl;
+        throw std::runtime_error("Shader has errors!");
     }
 
     id_ = glCreateProgram();
@@ -75,6 +77,7 @@ void Shader::CompileShader()
         glGetProgramInfoLog(id_, 512, NULL, errorInfo);
         std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
                   << errorInfo << std::endl;
+        throw std::runtime_error("Shader has errors!");
     }
 
     glDeleteShader(vertex);

@@ -82,8 +82,8 @@ void Application::Render()
     RenderingContext renderingContext;
     if (mainCamera_)
     {
-        renderingContext.viewMatrial = mainCamera_->GetViewMatrix();
-        renderingContext.projectionMatrial = mainCamera_->GetProjectionMatrix();
+        renderingContext.viewMatrix = mainCamera_->GetViewMatrix();
+        renderingContext.projectionMatrix = mainCamera_->GetProjectionMatrix();
     }
 
     scene_->Render(renderingContext);
