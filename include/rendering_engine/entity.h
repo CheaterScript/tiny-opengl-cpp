@@ -4,6 +4,7 @@
 #include <rendering_engine/shader.h>
 #include <rendering_engine/texture.h>
 #include <rendering_engine/Container.h>
+#include "rendering_engine/renderingContext.h"
 #include <memory>
 #include <vector>
 #include <glm/glm.hpp>
@@ -25,5 +26,5 @@ public:
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures_);
     ~Entity();
 
-    virtual void Render() override;
+    virtual void Render(RenderingContext renderingContext) override;
 };

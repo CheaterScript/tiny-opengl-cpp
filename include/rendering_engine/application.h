@@ -28,6 +28,7 @@ public:
 
     void Run();
     Container &getScene();
+    void Render();
     void ShowMouseCursor(bool bIsShow);
     void setMainCamera(std::shared_ptr<Camera> camera);
     std::shared_ptr<Camera> getMainCamera();

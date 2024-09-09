@@ -1,5 +1,6 @@
 #include "rendering_engine/application.h"
 #include "rendering_engine/eventManager.h"
+#include "rendering_engine/renderingContext.h"
 #include <iostream>
 
 #if defined(_WIN64)
@@ -7,6 +8,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <GLFW/glfw3native.h>
 #include <Windows.h>
+
 #endif
 void debugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam)
 {
@@ -56,7 +58,7 @@ void Application::Run()
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        scene_->Render();
+        Render();
 
         // GLenum error = glGetError();
         // if (error != GL_NO_ERROR)
@@ -72,6 +74,19 @@ void Application::Run()
 Container &Application::getScene()
 {
     return *scene_;
+}
+
+void Application::Render()
+{
+    // 创建上下文
+    RenderingContext renderingContext;
+    if (mainCamera_)
+    {
+        renderingContext.viewMatrial = mainCamera_->GetViewMatrix();
+        renderingContext.projectionMatrial = mainCamera_->GetProjectionMatrix();
+    }
+
+    scene_->Render(renderingContext);
 }
 
 void Application::ShowMouseCursor(bool bIsShow)

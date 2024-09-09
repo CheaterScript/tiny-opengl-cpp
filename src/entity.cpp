@@ -23,7 +23,8 @@ Entity::Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, con
 Entity::~Entity()
 {
 }
-void Entity::Render()
+
+void Entity::Render(RenderingContext renderingContext)
 {
     UpdateTransform();
     shader_->Use();
@@ -44,6 +45,6 @@ void Entity::Render()
 
     for (auto child : children)
     {
-        child->Render();
+        child->Render(renderingContext);
     }
 }

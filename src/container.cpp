@@ -18,16 +18,15 @@ void Container::AddChild(const std::shared_ptr<Container> &child)
     child->parent = shared_from_this();
 }
 
-void Container::Render()
+void Container::Render(RenderingContext renderingContext)
 {
     Update();
 
     for (auto child : children)
     {
-        child->Render();
+        child->Render(renderingContext);
     }
 }
-
 
 void Container::setTransform(const glm::mat4 &transform)
 {

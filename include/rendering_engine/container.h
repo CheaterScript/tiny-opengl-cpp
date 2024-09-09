@@ -1,5 +1,6 @@
 #pragma once
 
+#include "rendering_engine/renderingContext.h"
 #include <vector>
 #include <memory>
 #include <glm/glm.hpp>
@@ -26,7 +27,7 @@ public:
 
     void RemoveAllChildren();
     void AddChild(const std::shared_ptr<Container> &child);
-    virtual void Render();
+    virtual void Render(RenderingContext renderingContext);
     virtual void Update() {};
 
     void setTransform(const glm::mat4 &transform);
