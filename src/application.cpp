@@ -148,6 +148,7 @@ Application::Application(const unsigned int width, const unsigned height, const 
     glfwSetFramebufferSizeCallback(window_, Application::FramebufferSizeCallback);
     glfwSetCursorPosCallback(window_, Application::MouseCallback);
     glfwSetKeyCallback(window_, Application::KeyCallback);
+    // glfwSwapInterval(0);
 
     glEnable(GL_DEBUG_OUTPUT);
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
