@@ -10,8 +10,8 @@ uniform sampler2D texture1;
 uniform sampler2D texture2;
 
 void main() {
-    vec3 lightPosition = vec3(1.0, 1.0, 0.0);
-    vec3 lightColor = vec3(1.0, 0.0, 1.0);
+    vec3 lightPosition = vec3(10.0, 10.0, 0.0);
+    vec3 lightColor = vec3(0.11, 0.91, 0.41);
     float ambientStrength = 0.3;
 
     vec3 ambient = ambientStrength * lightColor;
@@ -22,5 +22,5 @@ void main() {
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * lightColor;
 
-    FragColor = vec4(ambient+diffuse, 1.0);
+    FragColor = vec4((ambient+diffuse)*vec3(1.0f,1.0f,1.0f), 1.0);
 }
