@@ -79,15 +79,9 @@ void MainScene::Init(Application *app)
         22, 23, 20};
 
     shared_ptr<Mesh> mesh = make_shared<Mesh>(vertices, indices);
-    shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/demo014/vShader.glsl", "assets/shaders/demo014/fShader.glsl");
-    shared_ptr<Texture> texture1 = make_shared<Texture>("assets/images/container.jpg", "texture1");
-    shared_ptr<Texture> texture2 = make_shared<Texture>("assets/images/awesomeface.png", "texture2");
+    shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/demo015/vShader.glsl", "assets/shaders/demo015/fShader.glsl");
 
     vector<shared_ptr<Texture>> *const textures = new vector<shared_ptr<Texture>>();
-
-    textures->push_back(texture1);
-    textures->push_back(texture2);
-
     box_ = make_shared<Entity>(mesh, shader, *textures);
     box2_ = make_shared<Entity>(mesh, shader, *textures);
     AddChild(box_);
