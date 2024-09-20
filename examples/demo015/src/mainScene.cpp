@@ -101,7 +101,6 @@ void MainScene::Init(Application *app)
 
 void MainScene::Update(float deltaTime)
 {
-    cout << deltaTime << endl;
     
     glm::mat4 trans = glm::mat4(1.0f);
     box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
