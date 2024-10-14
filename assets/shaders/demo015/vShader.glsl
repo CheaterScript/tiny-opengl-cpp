@@ -15,4 +15,4 @@ void main() {
     v_fragPosition = vec3(transform * vec4(position, 1.0));
     TextureCoord = textureCoord;
     v_normal = mat3(transpose(inverse(transform))) * a_normal;
-}
+}  

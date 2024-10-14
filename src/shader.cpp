@@ -116,3 +116,24 @@ void Shader::SetMat4(const string &name, glm::mat4 value) const
 {
     glUniformMatrix4fv(glGetUniformLocation(id_, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
+
+void Shader::ExtractUniforms()
+{
+    GLint uniformCount;
+    glGetProgramiv(id_, GL_ACTIVE_UNIFORMS, &uniformCount);
+
+    for (int i = 0; i < uniformCount; i++)
+    {
+        char uniformName[256];
+        GLsizei length;
+        GLint size;
+        GLenum type;
+
+        // 获取 uniform 的名称、大小和类型
+        glGetActiveUniform(id_, i, sizeof(uniformName), &length, &size, &type, uniformName);
+        GLint location = glGetUniformLocation(id_, uniformName);
+
+        // 将 uniform 名称和位置存储在 map 中
+        // uniforms_[uniformName] = location;
+    }
+}

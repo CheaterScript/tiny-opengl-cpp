@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <unordered_map>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ private:
     const char *vShaderCode_, *fShaderCode_;
     string vertexCode;
     string fragmentCode;
+    std::unordered_map<std::string, unsigned int> uniforms_;
 
 public:
     Shader(const char *vertexPath, const char *fragmentPath);
@@ -27,4 +29,5 @@ public:
     void SetInt(const string &name, int value) const;
     void SetFloat(const string &name, float value) const;
     void SetMat4(const string &name, glm::mat4 value) const;
+    void ExtractUniforms();
 };
