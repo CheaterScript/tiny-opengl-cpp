@@ -67,6 +67,7 @@
         "array": "cpp",
         "chrono": "cpp",
         "forward_list": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "variant": "cpp"
     }
 }

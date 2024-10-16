@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
 #include <iostream>
+#include <variant>
 
 Entity::Entity()
 {
@@ -24,14 +25,14 @@ Entity::~Entity()
 {
 }
 
-void Entity::Render(RenderingContext renderingContext)
+void Entity::Render(RenderingContext &renderingContext)
 {
     Update(renderingContext.deltaTime);
     UpdateTransform();
     shader_->Use();
-    shader_->SetMat4("transform", worldTransform_);
-    shader_->SetMat4("viewMatrix", renderingContext.viewMatrix);
-    shader_->SetMat4("projectionMatrix", renderingContext.projectionMatrix);
+    // shader_->SetMat4("transform", worldTransform_);
+    // shader_->SetMat4("viewMatrix", renderingContext.viewMatrix);
+    // shader_->SetMat4("projectionMatrix", renderingContext.projectionMatrix);
     unsigned int index = GL_TEXTURE0;
     for (auto texture : textures_)
     {
@@ -49,5 +50,32 @@ void Entity::Render(RenderingContext renderingContext)
     for (auto child : children)
     {
         child->Render(renderingContext);
+    }
+}
+
+void Entity::ApplyUniforms(RenderingContext &renderingContext, Shader *shader, Entity *entity)
+{
+    auto uniforms = shader->GetUniforms();
+    auto uniformGroup = shader->GetUniformGroup();
+    for (const auto &[uniformName, location] : uniforms)
+    {
+        auto setter = uniformGroup.find(uniformName);
+        if (setter != uniformGroup.end())
+        {
+            auto func = setter->second;
+            auto value = func(renderingContext, entity);
+            if (auto val = std::get_if<float>(&value))
+            {
+                shader->SetFloat(uniformName, *val);
+            }
+            else if (auto val = std::get_if<glm::mat4>(&value))
+            {
+                shader->SetMat4(uniformName, *val);
+            }
+            else if (auto val = std::get_if<glm::vec3>(&value))
+            {
+
+            }
+        }
     }
 }

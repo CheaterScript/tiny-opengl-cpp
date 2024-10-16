@@ -24,6 +24,6 @@ const glm::mat4 Camera::GetProjectionMatrix() const
     return glm::perspective(glm::radians(fov), aspectRatio, near, far);
 }
 
-void Camera::Render(RenderingContext renderingContext)
+void Camera::Render(RenderingContext &renderingContext)
 {
 }

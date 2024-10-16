@@ -88,6 +88,14 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) : vertexPath_(v
 {
     Load();
     CompileShader();
+    ExtractUniforms();
+}
+
+Shader::Shader(const char *vertexPath, const char *fragmentPath, shared_ptr<UniformGroup> &uniformGroup)
+{
+    Shader(vertexPath, fragmentPath);
+
+    uniformGroup_ = uniformGroup;
 }
 
 Shader::~Shader()
@@ -134,6 +142,17 @@ void Shader::ExtractUniforms()
         GLint location = glGetUniformLocation(id_, uniformName);
 
         // 将 uniform 名称和位置存储在 map 中
-        // uniforms_[uniformName] = location;
+        uniforms_[uniformName] = location;
+        std::cout << uniformName << endl;
     }
+}
+
+ std::unordered_map<std::string, unsigned int> &Shader::GetUniforms()
+{
+    return uniforms_;
+}
+
+ std::unordered_map<std::string, UniformSetter> &Shader::GetUniformGroup()
+{
+    return uniformGroup_->GetUniforms();
 }

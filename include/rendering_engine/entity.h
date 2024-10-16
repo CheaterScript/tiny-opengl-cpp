@@ -26,5 +26,6 @@ public:
     Entity(const shared_ptr<Mesh> mesh, const shared_ptr<Shader> shader, const vector<shared_ptr<Texture>> &textures_);
     ~Entity();
 
-    virtual void Render(RenderingContext renderingContext) override;
+    virtual void Render(RenderingContext &renderingContext) override;
+    virtual void ApplyUniforms(RenderingContext &renderingContext, Shader* shader, Entity* entity);
 };

@@ -18,7 +18,7 @@ void Container::AddChild(const std::shared_ptr<Container> &child)
     child->parent = shared_from_this();
 }
 
-void Container::Render(RenderingContext renderingContext)
+void Container::Render(RenderingContext &renderingContext)
 {
     Update(renderingContext.deltaTime);
 
