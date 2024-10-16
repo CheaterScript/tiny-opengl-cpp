@@ -91,10 +91,8 @@ Shader::Shader(const char *vertexPath, const char *fragmentPath) : vertexPath_(v
     ExtractUniforms();
 }
 
-Shader::Shader(const char *vertexPath, const char *fragmentPath, shared_ptr<UniformGroup> &uniformGroup)
+Shader::Shader(const char *vertexPath, const char *fragmentPath, shared_ptr<UniformGroup> &uniformGroup) : Shader(vertexPath, fragmentPath)
 {
-    Shader(vertexPath, fragmentPath);
-
     uniformGroup_ = uniformGroup;
 }
 
@@ -158,6 +156,6 @@ std::unordered_map<std::string, UniformSetter> &Shader::GetUniformGroup()
     {
         uniformGroup_ = UniformGroup::GetDefaultUniformGroup();
     }
-    
+
     return uniformGroup_->GetUniforms();
 }

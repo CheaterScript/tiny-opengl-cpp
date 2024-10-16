@@ -3,6 +3,7 @@
 #include <vector>
 #include "rendering_engine/shader.h"
 #include "rendering_engine/texture.h"
+#include "rendering_engine/uniformGroup.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -79,7 +80,8 @@ void MainScene::Init(Application *app)
         22, 23, 20};
 
     shared_ptr<Mesh> mesh = make_shared<Mesh>(vertices, indices);
-    shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/demo015/vShader.glsl", "assets/shaders/demo015/fShader.glsl");
+    shared_ptr<UniformGroup> uniforms = UniformGroup::GetDefaultUniformGroup();
+    shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/demo015/vShader.glsl", "assets/shaders/demo015/fShader.glsl", uniforms);
 
     vector<shared_ptr<Texture>> *const textures = new vector<shared_ptr<Texture>>();
     box_ = make_shared<Entity>(mesh, shader, *textures);
@@ -101,7 +103,7 @@ void MainScene::Init(Application *app)
 
 void MainScene::Update(float deltaTime)
 {
-    
+
     glm::mat4 trans = glm::mat4(1.0f);
     box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
     box_->scale = glm::vec3(0.5f);
