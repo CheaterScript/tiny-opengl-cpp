@@ -81,7 +81,14 @@ void MainScene::Init(Application *app)
 
     shared_ptr<Mesh> mesh = make_shared<Mesh>(vertices, indices);
     shared_ptr<UniformGroup> uniforms = UniformGroup::GetDefaultUniformGroup();
-    shared_ptr<Shader> shader = make_shared<Shader>("assets/shaders/demo015/vShader.glsl", "assets/shaders/demo015/fShader.glsl", uniforms);
+    uniforms->Register("u_lightPosition", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
+                       { return glm::vec3(10.0, 10.0, 0.0); });
+    uniforms->Register("u_lightColor", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
+                       { return glm::vec3(0.11, 0.91, 0.41); });
+    uniforms->Register("u_ambientStrength", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
+                       { return 1.0f; });
+    shared_ptr<Shader>
+        shader = make_shared<Shader>("assets/shaders/demo016/vShader.glsl", "assets/shaders/demo016/fShader.glsl", uniforms);
 
     vector<shared_ptr<Texture>> *const textures = new vector<shared_ptr<Texture>>();
     box_ = make_shared<Entity>(mesh, shader, *textures);

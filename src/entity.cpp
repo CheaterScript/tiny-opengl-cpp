@@ -75,7 +75,7 @@ void Entity::ApplyUniforms(RenderingContext &renderingContext, Shader *shader, E
             }
             else if (auto val = std::get_if<glm::vec3>(&value))
             {
-
+                shader->SetVec3(uniformName, *val);
             }
         }
     }
