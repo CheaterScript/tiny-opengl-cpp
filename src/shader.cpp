@@ -147,12 +147,17 @@ void Shader::ExtractUniforms()
     }
 }
 
- std::unordered_map<std::string, unsigned int> &Shader::GetUniforms()
+std::unordered_map<std::string, unsigned int> &Shader::GetUniforms()
 {
     return uniforms_;
 }
 
- std::unordered_map<std::string, UniformSetter> &Shader::GetUniformGroup()
+std::unordered_map<std::string, UniformSetter> &Shader::GetUniformGroup()
 {
+    if (!uniformGroup_)
+    {
+        uniformGroup_ = UniformGroup::GetDefaultUniformGroup();
+    }
+    
     return uniformGroup_->GetUniforms();
 }

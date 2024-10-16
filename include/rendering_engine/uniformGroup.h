@@ -11,7 +11,6 @@
 #include <rendering_engine/renderingContext.h>
 
 class Entity;
-
 using UniformVariant = std::variant<float, glm::mat4, glm::vec3>;
 using UniformSetter = std::function<UniformVariant(RenderingContext &, Entity *)>;
 
@@ -26,12 +25,7 @@ public:
     ~UniformGroup() = default;
 
 public:
-    static std::shared_ptr<UniformGroup> GetDefaultUniformGroup()
-    {
-        auto group = std::make_shared<UniformGroup>();
-        return group;
-    }
-
+    static std::shared_ptr<UniformGroup> GetDefaultUniformGroup();
     void Register(std::string name, UniformSetter setter)
     {
         uniforms_[name] = setter;

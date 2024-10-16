@@ -33,6 +33,7 @@ void Entity::Render(RenderingContext &renderingContext)
     // shader_->SetMat4("transform", worldTransform_);
     // shader_->SetMat4("viewMatrix", renderingContext.viewMatrix);
     // shader_->SetMat4("projectionMatrix", renderingContext.projectionMatrix);
+    ApplyUniforms(renderingContext, shader_.get(), this);
     unsigned int index = GL_TEXTURE0;
     for (auto texture : textures_)
     {
