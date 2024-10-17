@@ -131,10 +131,11 @@ void Shader::SetVec3(const string &name, glm::vec3 value) const
     glUniform3f(glGetUniformLocation(id_, name.c_str()), value.x, value.y, value.z);
 }
 void Shader::ExtractUniforms()
+
 {
     GLint uniformCount;
     glGetProgramiv(id_, GL_ACTIVE_UNIFORMS, &uniformCount);
-
+    std::cout << uniformCount << endl;
     for (int i = 0; i < uniformCount; i++)
     {
         char uniformName[256];

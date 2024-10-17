@@ -5,6 +5,7 @@
 #include "rendering_engine/entity.h"
 #include "rendering_engine/application.h"
 #include "rendering_engine/camera.h"
+#include "rendering_engine/uniformGroup.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ private:
     shared_ptr<Entity> box_;
     shared_ptr<Entity> box2_;
     shared_ptr<Camera> camera_;
+    shared_ptr<UniformGroup> uniforms_;
 
 public:
     MainScene(/* args */);

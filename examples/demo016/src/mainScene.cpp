@@ -81,12 +81,15 @@ void MainScene::Init(Application *app)
 
     shared_ptr<Mesh> mesh = make_shared<Mesh>(vertices, indices);
     shared_ptr<UniformGroup> uniforms = UniformGroup::GetDefaultUniformGroup();
+    uniforms_ = uniforms;
     uniforms->Register("u_lightPosition", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
-                       { return glm::vec3(10.0, 10.0, 0.0); });
+                       { auto vec = glm::vec3(0,0,  -5 + abs(sin((float)glfwGetTime()))*5);
+                            std::cout << "vec3(" << vec.x << ", " << vec.y << ", " << vec.z << ")\n";
+                            return vec; });
     uniforms->Register("u_lightColor", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
                        { return glm::vec3(0.11, 0.91, 0.41); });
     uniforms->Register("u_ambientStrength", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
-                       { return 0.3f; });
+                       { return 0.1f; });
     uniforms->Register("u_normalMatrix", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
                        { return glm::transpose(glm::inverse(renderingContext.viewMatrix * entity->getWorldTransform())); });
     uniforms->Register("u_specularStrength", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
@@ -96,12 +99,14 @@ void MainScene::Init(Application *app)
 
     vector<shared_ptr<Texture>> *const textures = new vector<shared_ptr<Texture>>();
     box_ = make_shared<Entity>(mesh, shader, *textures);
+    box_->location = glm::vec3(0.0, 0.0, -5.0f);
+    box_->scale = glm::vec3(5.0f);
     box2_ = make_shared<Entity>(mesh, shader, *textures);
     AddChild(box_);
-    AddChild(box2_);
+    // AddChild(box2_);
 
     camera_ = make_shared<Camera>();
-    camera_->location = glm::vec3(0, 0, 18.0f);
+    camera_->location = glm::vec3(0, 0, 30.0f);
     AddChild(camera_);
     app->setMainCamera(camera_);
 
@@ -115,15 +120,15 @@ void MainScene::Init(Application *app)
 void MainScene::Update(float deltaTime)
 {
 
-    glm::mat4 trans = glm::mat4(1.0f);
-    box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
-    box_->scale = glm::vec3(10.0f);
+    // glm::mat4 trans = glm::mat4(1.0f);
+    // box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    // box_->scale = glm::vec3(10.0f);
 
-    box2_->location = glm::vec3(1, 0, -0.5);
-    box2_->scale = glm::vec3(0.2f);
-    box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    // box2_->location = glm::vec3(1, 0, -0.5);
+    // box2_->scale = glm::vec3(0.2f);
+    // box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
 
-    cout << sin((float)glfwGetTime()) << endl;
-    camera_->location = glm::vec3(0, 0, 30);
-    camera_->rotation = glm::vec3(sin((float)glfwGetTime()) * 15, 0, 0);
+    // // cout << sin((float)glfwGetTime()) << endl;
+    // camera_->location = glm::vec3(0, 0, 30);
+    // camera_->rotation = glm::vec3(sin((float)glfwGetTime()) * 15, 0, 0);
 }

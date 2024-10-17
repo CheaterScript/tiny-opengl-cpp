@@ -11,6 +11,7 @@ uniform sampler2D texture1;
 uniform sampler2D texture2;
 
 uniform vec3 u_lightColor;
+uniform vec3 u_lightColor2;
 uniform float u_ambientStrength;
 uniform float u_specularStrength;
 void main() {
