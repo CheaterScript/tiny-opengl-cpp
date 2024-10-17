@@ -88,9 +88,7 @@ void MainScene::Init(Application *app)
     uniforms->Register("u_ambientStrength", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
                        { return 0.3f; });
     uniforms->Register("u_normalMatrix", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
-                       { return glm::inverse(glm::transpose(entity->getWorldTransform())); });
-    uniforms->Register("u_cameraPosition", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
-                       { return glm::vec3(0, 0, 15.0f); });
+                       { return glm::transpose(glm::inverse(renderingContext.viewMatrix * entity->getWorldTransform())); });
     uniforms->Register("u_specularStrength", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
                        { return 0.5f; });
     shared_ptr<Shader>
@@ -119,13 +117,13 @@ void MainScene::Update(float deltaTime)
 
     glm::mat4 trans = glm::mat4(1.0f);
     box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
-    box_->scale = glm::vec3(5.0f);
+    box_->scale = glm::vec3(0.5f);
 
     box2_->location = glm::vec3(1, 0, -0.5);
     box2_->scale = glm::vec3(0.2f);
     box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
 
-    // cout << sin((float)glfwGetTime()) << endl;
-    // camera_->location = glm::vec3(0, 0, 5);
-    // camera_->rotation = glm::vec3(sin((float)glfwGetTime()) * 15, 0, 0);
+    cout << sin((float)glfwGetTime()) << endl;
+    camera_->location = glm::vec3(0, 0, 5);
+    camera_->rotation = glm::vec3(sin((float)glfwGetTime()) * 15, 0, 0);
 }

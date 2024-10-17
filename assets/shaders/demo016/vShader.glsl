@@ -6,6 +6,7 @@ layout(location = 2) in vec2 textureCoord;
 out vec2 TextureCoord;
 out vec3 v_normal;
 out vec3 v_fragPosition;
+out vec3 v_lightPoistion;
 
 uniform mat4 u_transform;
 uniform mat4 u_viewMatrix;
@@ -13,7 +14,7 @@ uniform mat4 u_projectionMatrix;
 uniform mat4 u_normalMatrix;
 void main() {
     gl_Position = u_projectionMatrix * u_viewMatrix * u_transform * vec4(position, 1.0);
-    v_fragPosition = vec3(u_transform * vec4(position, 1.0));
-    TextureCoord = textureCoord;
+    v_fragPosition = vec3(u_viewMatrix * u_transform * vec4(position, 1.0));
     v_normal = mat3(u_normalMatrix) * a_normal;
-}  
+    v_lightPoistion = vec3(u_viewMatrix * vec4(v_lightPoistion, 1.0));
+}
