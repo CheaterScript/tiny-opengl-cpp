@@ -12,7 +12,8 @@ uniform sampler2D texture2;
 uniform vec3 u_lightPosition;
 uniform vec3 u_lightColor;
 uniform float u_ambientStrength;
-
+uniform float u_specularStrength;
+uniform vec3 u_cameraPosition;
 void main() {
     // vec3 u_lightPosition = vec3(10.0, 10.0, 0.0);
     // vec3 u_lightColor = vec3(0.11, 0.91, 0.41);
@@ -25,5 +26,11 @@ void main() {
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * u_lightColor;
 
-    frag_color = vec4((ambient+diffuse)*vec3(1.0f,1.0f,1.0f), 1.0);
+    vec3 viewDir = normalize(u_cameraPosition - v_fragPosition);
+    vec3 reflectDir = reflect(-lightDir, norm);
+
+    float specRatio = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = u_specularStrength * specRatio * u_lightColor;
+
+    frag_color = vec4((ambient + diffuse + specular) * vec3(1.0, 1.0, 1.0), 1.0);
 }
