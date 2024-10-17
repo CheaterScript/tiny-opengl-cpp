@@ -1,6 +1,6 @@
 #version 330 core
 
-out vec4 FragColor;
+out vec4 frag_color;
 
 in vec2 TextureCoord;
 in vec3 v_normal;
@@ -25,5 +25,5 @@ void main() {
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * u_lightColor;
 
-    FragColor = vec4((ambient+diffuse)*vec3(1.0f,1.0f,1.0f), 1.0);
+    frag_color = vec4((ambient+diffuse)*vec3(1.0f,1.0f,1.0f), 1.0);
 }

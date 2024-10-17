@@ -86,7 +86,9 @@ void MainScene::Init(Application *app)
     uniforms->Register("u_lightColor", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
                        { return glm::vec3(0.11, 0.91, 0.41); });
     uniforms->Register("u_ambientStrength", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
-                       { return 1.0f; });
+                       { return 0.3f; });
+    uniforms->Register("u_normalMatrix", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
+                       { return glm::inverse(glm::transpose(entity->getWorldTransform())); });
     shared_ptr<Shader>
         shader = make_shared<Shader>("assets/shaders/demo016/vShader.glsl", "assets/shaders/demo016/fShader.glsl", uniforms);
 
