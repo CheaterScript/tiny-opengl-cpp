@@ -83,7 +83,7 @@ void MainScene::Init(Application *app)
     shared_ptr<UniformGroup> uniforms = UniformGroup::GetDefaultUniformGroup();
     uniforms_ = uniforms;
     uniforms->Register("u_lightPosition", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
-                       { auto vec = glm::vec3(0,0,  -5 + abs(sin((float)glfwGetTime()))*5);
+                       { auto vec = glm::vec3(0,0,  -3 + abs(sin((float)glfwGetTime()))*5);
                             std::cout << "vec3(" << vec.x << ", " << vec.y << ", " << vec.z << ")\n";
                             return vec; });
     uniforms->Register("u_lightColor", [](RenderingContext &renderingContext, Entity *entity) -> UniformVariant
@@ -103,10 +103,10 @@ void MainScene::Init(Application *app)
     box_->scale = glm::vec3(5.0f);
     box2_ = make_shared<Entity>(mesh, shader, *textures);
     AddChild(box_);
-    // AddChild(box2_);
+    AddChild(box2_);
 
     camera_ = make_shared<Camera>();
-    camera_->location = glm::vec3(0, 0, 30.0f);
+    camera_->location = glm::vec3(0, 0, 8.0f);
     AddChild(camera_);
     app->setMainCamera(camera_);
 
@@ -120,15 +120,15 @@ void MainScene::Init(Application *app)
 void MainScene::Update(float deltaTime)
 {
 
-    // glm::mat4 trans = glm::mat4(1.0f);
-    // box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
-    // box_->scale = glm::vec3(10.0f);
+    glm::mat4 trans = glm::mat4(1.0f);
+    box_->rotation = glm::vec3((float)glfwGetTime() * 50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    box_->scale = glm::vec3(0.8f);
 
-    // box2_->location = glm::vec3(1, 0, -0.5);
-    // box2_->scale = glm::vec3(0.2f);
-    // box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
+    box2_->location = glm::vec3(1, 0, -0.5);
+    box2_->scale = glm::vec3(0.2f);
+    box2_->rotation = glm::vec3((float)glfwGetTime() * -50, (float)glfwGetTime() * 50, (float)glfwGetTime() * 50);
 
-    // // cout << sin((float)glfwGetTime()) << endl;
-    // camera_->location = glm::vec3(0, 0, 30);
+    // cout << sin((float)glfwGetTime()) << endl;
+    // camera_->location = glm::vec3(0, 0, 15);
     // camera_->rotation = glm::vec3(sin((float)glfwGetTime()) * 15, 0, 0);
 }
